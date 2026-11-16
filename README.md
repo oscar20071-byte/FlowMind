@@ -1,23 +1,25 @@
 # FlowMind
 
-Visual workflow automation platform. Build, connect, save, and execute workflows through a visual node editor.
+Visual workflow automation platform. Build, connect, save, and execute workflows through a browser-based node editor.
 
-## MVP stack
-- React + TypeScript + Vite
-- React Flow
+## Deploy to the web (no local terminal)
+
+1. Open [Render Blueprint](https://render.com/deploy) and connect this GitHub repository.
+2. Render reads `render.yaml`, builds the frontend, and starts the API and website as one web service.
+3. Open the generated `onrender.com` URL. The same URL serves the application and its `/api` endpoints.
+
+The service health endpoint is `/api/health`.
+
+## Stack
+
+- React + TypeScript + Vite + React Flow
 - Node.js + Express + Zod
-- Local JSON persistence for development
+- One hosted web service serves both the frontend and backend.
 
-## Run locally
-1. Install Node.js 20+.
-2. Run `npm install` at the repository root.
-3. Run `npm run dev`.
-4. Open http://localhost:5173. API health: http://localhost:4000/api/health.
+## Important storage limitation
 
-## Node types
-Manual Trigger, Set Value, Condition, and Log.
+The current JSON store is a development MVP. On Render's free service, local files are ephemeral and may be lost when the service restarts or redeploys. Do not use this deployment for important workflows until durable hosted database storage and authentication are added.
 
-## Production note
-Local JSON storage is for development only. Before production, add PostgreSQL, authentication, authorization, encrypted secrets, durable queues, isolated workers, timeouts, rate limits, and audit logging. Never execute arbitrary user-provided code.
+## Local development
 
-See docs/ARCHITECTURE.md and docs/API.md.
+Install Node.js 20+, run `npm install`, then `npm run dev`. The web deployment does not require these local commands.
