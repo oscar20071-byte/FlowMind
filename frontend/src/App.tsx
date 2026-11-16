@@ -3,7 +3,7 @@ import {ReactFlow,Background,Controls,MiniMap,addEdge,useEdgesState,useNodesStat
 import {Workflow,Play,Save,Plus,GitBranch,Settings2,Terminal,Activity} from "lucide-react";
 const API="http://localhost:4000/api";
 type D={label?:string;key?:string;value?:string;equals?:string;message?:string};
-function FlowNode({data,type}:{data:D;type?:string}){return <div className="node"><Handle type="target" position={Position.Top}/><b>{data.label??type}</b><small>{type==="setValue"?`${data.key} = ${data.value}`:type==="condition"?`${data.key} equals ${data.equals}`:type==="log"?data.message:"Manual start"}</small><Handle type="source" position={Position.Bottom}/>{type==="condition"&&<Handle type="source" position={Position.Right} id="false"/>}</div>}
+function FlowNode({data,type}:{data:D;type?:string}){return <div className="node"><Handle type="target" position={Position.Top}/><b>{data.label??type}</b><small>{type==="setValue"?`${data.key} = ${data.value}`:type==="condition"?`${data.key} equals ${data.equals}`:type==="log"?data.message:"Manual start"}</small><Handle type="source" position={Position.Bottom} id={type==="condition"?"true":undefined}/>{type==="condition"&&<Handle type="source" position={Position.Right} id="false"/>}</div>}
 const nodeTypes={manualTrigger:FlowNode,setValue:FlowNode,condition:FlowNode,log:FlowNode};
 export default function App(){
 const [nodes,setNodes,onNodesChange]=useNodesState<Node<D>>([{id:"start",type:"manualTrigger",position:{x:80,y:40},data:{label:"Manual Trigger"}},{id:"value",type:"setValue",position:{x:80,y:190},data:{label:"Set Value",key:"status",value:"ready"}},{id:"log",type:"log",position:{x:80,y:340},data:{label:"Log",message:"Workflow completed"}}]);
