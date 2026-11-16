@@ -8,7 +8,9 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm:dev -w backend\" \"npm:dev -w frontend\"",
-    "build": "npm run build -w frontend"
+    "build": "npm run build -w frontend",
+    "test": "npm run test -w backend",
+    "typecheck": "npm run typecheck -w backend"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
